@@ -66,6 +66,7 @@ def create_app(test_config=None):
   @app.route('/movies', methods=['POST'])
   @requires_auth(permission = "create:movies")
   def create_movie_handler(payload):
+    actor_list = []
     movie_list = Movies.query.all()
     film_list = Films.query.all()
     movie_id_list = [item.id for item in movie_list]
@@ -87,7 +88,13 @@ def create_app(test_config=None):
         participated_actor_list = movie_info_client['pariticipatedActors']
         for actor in participated_actor_list:
           Films(id=film_id,actor_id=actor['id'], movie_id=new_id).insert()
-        print(movie_list)
+        for movie in movie_list:
+          casted_actor_id_list = Films.query.filter_by(movie_id = movie["id"]).all()
+          for item in casted_actor_id_list:
+            actor_data = Actors.query.filter_by(id = item.actor_id).one_or_none()
+            actor_list.append(actor_data)
+          movie["pariticipatedActors"] = [Actors.format(item) for item in actor_list]
+          actor_list = []
     except:
         print(sys.exc_info())
         abort(422)
