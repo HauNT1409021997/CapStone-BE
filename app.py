@@ -119,15 +119,18 @@ def create_app(test_config=None):
         Movies(id= search_id,title= searched_movie.title, release_date=searched_movie.release_date).update()
         film_db_data = db.session.query(Films).filter_by(movie_id = search_id).all()
         film_db_data_id = [item.actor_id for item in film_db_data]
+
         if len(film_db_data) != 0 and len(update_info['pariticipatedActors']) != 0:
           film_id = film_db_data[0].id
-          for actor in update_info['pariticipatedActors']:
-            actor_db_data = db.session.query(Films).filter_by(actor_id = actor['id'], movie_id = search_id).one_or_none()
-              
-            if actor_db_data != None and actor['id'] not in film_db_data_id:
-              db.session.query(Films).filter_by(actor_id = actor['id']).delete()
+          casted_actor_id_list = [item['id'] for item in update_info['pariticipatedActors']]
+
+          for id in film_db_data_id:
+            if id not in casted_actor_id_list:
+              db.session.query(Films).filter_by(actor_id = id).delete()
               db.session.commit()
 
+          for actor in update_info['pariticipatedActors']:
+            actor_db_data = db.session.query(Films).filter_by(actor_id = actor['id'], movie_id = search_id).one_or_none()
             if actor_db_data == None:
               Films(id = film_id, actor_id= actor['id'], movie_id= search_id).insert()
 
@@ -161,10 +164,6 @@ def create_app(test_config=None):
         db.session.query(Films).filter_by(movie_id = search_id).delete()
         db.session.commit()
         searched_movie.delete()
-        # movie_list = Movies.query.order_by(db.asc(Movies.id)).all()
-        # for index, movie  in enumerate(movie_list):
-        #   movie.id = index + 1
-        #   Movies(id= movie.id,title= movie.title, release_date= movie.release_date).update()
         is_removed = True
     except:
         db.session.rollback()
