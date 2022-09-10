@@ -1,7 +1,7 @@
 from sqlalchemy import Column, ForeignKey, String, Integer, Float, Boolean
 from flask_sqlalchemy import SQLAlchemy
 database_name = "TODO"
-database_path = "postgresql://{}:{}@{}/{}".format('postgres', '123', 'localhost:5432', database_name)
+# database_path = "postgresql://{}:{}@{}/{}".format('postgres', '123', 'localhost:5432', database_name)
 database_path = "postgresql+psycopg2://cmsrraognpmaqi:413c93c2cabff045b2bb6910aa152d4f611d582cffa2f1652701518a8d4f1189@ec2-107-23-76-12.compute-1.amazonaws.com:5432/dehkajpu6edohp?sslmode=require"
 db = SQLAlchemy()
 

@@ -5,7 +5,7 @@
 ## API Reference
 
 ### Getting Started
-- Base URL: At present this app can only be run locally and is not hosted as a base URL. The backend app is hosted at the default, ` http://127.0.0.1:5000`, which is set as a proxy in the frontend configuration. 
+- Base URL: At present this app can only be run locally and is not hosted as a base URL. The backend app is hosted at the default, ` https://haunt-capstone-app.herokuapp.com/`, which is set as a proxy in the frontend configuration. 
 - Authentication:
 	Authen Introduction:
 		There are three roles with each role has different permissions.
@@ -23,7 +23,7 @@
 			permissions: 
 				Can view actors and movies
 				Add or delete an actor from the database
-				odify actors or movies
+				Modify actors or movies
 
 		Executive Producer:
 			email: ExecutiveProducer@gmail.com
@@ -31,9 +31,17 @@
 			permissions: 
 				Can view actors and movies
 				Add or delete an actor from the database
-				odify actors or movies
+				Modify actors or movies
 				Add or delete a movie from the database
-		
+
+- Api testing:
+  api testing introduction:
+    A postman file has been setup for three authorized roles to test the api.
+    Each file has been named after the role name.
+    Before run any testing, please check the following conditions:
+      - The brear token must be valid and entered in the file
+      - Check the api explanation below to further understand how api purpose and it's parameter meaning
+      - Run the app live first to gain a broad view and understandings about the app features
 
 ### Error Handling
 Errors are returned as JSON objects in the following format:
@@ -57,7 +65,7 @@ The API will return three error types when requests fail:
 				- if the api parameter movieName have a value then return a list with only seached results
 				- if the value is not found then error message 404 will be invoked
 				- the api can be invoked by entering value on the search bar then focus out
-- Sample: `curl http://127.0.0.1:5000/movies?movieName=Water world`
+- Sample: `curl https://haunt-capstone-app.herokuapp.com/movies?movieName=Water world`
 
 ```
 request response
@@ -90,7 +98,7 @@ request response
     - If provided, create movies in the database.
 				- If the actor name is selected. Then actor id will be created in table Film in the database.
 				- Returns the success value, list of movies. 
-- `curl http://127.0.0.1:5000/movies`
+- `curl https://haunt-capstone-app.herokuapp.com/movies`
 ```
 request payload
 	{
@@ -138,7 +146,7 @@ request response
     - Update the current movie data in table Movies in the database.
 				- Update the current film data in table Films in the database.
 				- Returns the success value, the newly updated movie. 
-- `curl -X PATCH http://127.0.0.1:5000/movies-update-info?movie_id=1`
+- `curl -X PATCH https://haunt-capstone-app.herokuapp.com/movies-update-info?movie_id=1`
 ```
 request payload
 movie_id: 1
@@ -205,7 +213,7 @@ request response
 #### DELETE /movies-eviction
 - General:
     - Deletes the movie of the given ID if it exists. Return the success value.
-- `curl -X DELETE http://127.0.0.1:5000/movies-eviction?movie_id=6`
+- `curl -X DELETE https://haunt-capstone-app.herokuapp.com/movies-eviction?movie_id=6`
 ```
 request payload 
 movie_id=6
@@ -220,7 +228,7 @@ request response
 #### GET /actors-all
 - General:
     - Returns the success value, list of actors. 
-- `curl http://127.0.0.1:5000/actors-all`
+- `curl https://haunt-capstone-app.herokuapp.com/actors-all`
 ```
 request response
 {
@@ -252,7 +260,7 @@ request response
 - General:
 				- If provided, search movies that matches the movieId property. 
 				- Returns the success value, list of actors who were casted into the movie. 
-- `curl http://127.0.0.1:5000/casted-actors?movieId=1`
+- `curl https://haunt-capstone-app.herokuapp.com/casted-actors?movieId=1`
 ```
 request payload 
 movieId: 1
@@ -292,7 +300,7 @@ request response
 - General:
     - If provided, search actor based on the actor's name, actor's age, actor's gender.
 				- Returns the success value, list of actors. 
-- `curl http://127.0.0.1:5000/actors-filter`
+- `curl https://haunt-capstone-app.herokuapp.com/actors-filter`
 ```
 request payload
 {
@@ -321,7 +329,7 @@ request response
 - General:
     - If provided, create actor data in Actors table in the database.
 				- Returns the success value, list of actors including newly created actor data. 
-- `curl http://127.0.0.1:5000/actors`
+- `curl https://haunt-capstone-app.herokuapp.com/actors`
 ```
 request payload
 {
@@ -354,7 +362,7 @@ request response
 - General:
     - If provided, update the actor's data in the Actors table based on the actor id.
 				- Returns the success value, updated actor data. 
-- `curl -X PATCH http://127.0.0.1:5000/actors-update-info?actor_id=12`
+- `curl -X PATCH https://haunt-capstone-app.herokuapp.com/actors-update-info?actor_id=12`
 ```
 request payload
 {
@@ -380,7 +388,7 @@ request response
 - General:
     - Deletes the actor of the given ID if it exists. Return the success value, list of actors.
 				- Deletes the associative data between movie and actor in table Films.
-- `curl -X DELETE http://127.0.0.1:5000/actors-eviction?actor_id=13`
+- `curl -X DELETE https://haunt-capstone-app.herokuapp.com/actors-eviction?actor_id=13`
 ```
 request payload 
 actor_id: 13

@@ -5,8 +5,8 @@ import json
 from flask_sqlalchemy import SQLAlchemy
 from app import create_app
 from models import setup_db, Movies, Actors
-
-authenActorToken = "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IlVpcEJ2N0NFV3pDTGpvMmJxd0xGQiJ9.eyJpc3MiOiJodHRwczovL2Rldi1hNWVlaDRjcS51cy5hdXRoMC5jb20vIiwic3ViIjoiYXV0aDB8NjMxMDc2YzBiZGVhODBmYzY1ZWE4OGEwIiwiYXVkIjoiQ2FwU3RvbmUtYXBwIiwiaWF0IjoxNjYyMTI4MzQ5LCJleHAiOjE2NjIxMzU1NDksImF6cCI6Im03bkRqa29qTmpDMHp1bUJBR1pHOXRrQkJMWHdPWDVGIiwic2NvcGUiOiIiLCJwZXJtaXNzaW9ucyI6WyJjcmVhdGU6YWN0b3JzIiwiY3JlYXRlOm1vdmllcyIsImRlbGV0ZTphY3RvcnMiLCJkZWxldGU6bW92aWVzIiwiZ2V0OmFjdG9ycyIsImdldDptb3ZpZXMiLCJ1cGRhdGU6YWN0b3JzIiwidXBkYXRlOm1vdmllcyJdfQ.YE-OLt2p0bH9ZOz3lVp7uGneEz4mV-aRVH0SCMj745vb4aS7O-qL4ZDQFWE3B6Zn2WjpVkaOP1alEbe_wAp4aQFpjAajM76j_vDBgT2Nt3E9lFMmpUcaLG9JhiCGeoaXVzMgrJZvsfoHio7VLAlAxdBM7-LpdTr06kKtAFPg_hf2nk2G7n3M940MAMAGRGjpFexuuttQYZhr3LCYvF_Mgu4ygOeDX4LsKA1BDs0pGzN_MXNFzKEo7SoxB2CbjeKquahWZUUmbbWVX2drKMPKvVr4kI-xa_3YtC48Z2zuWhPnU9KYrpu6vNr3VPY9HqGoQVZRPbqCGKAs3jnTTLTWLA"
+#replace with token in the postman file to run the file
+authenActorToken = "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IlVpcEJ2N0NFV3pDTGpvMmJxd0xGQiJ9.eyJpc3MiOiJodHRwczovL2Rldi1hNWVlaDRjcS51cy5hdXRoMC5jb20vIiwic3ViIjoiYXV0aDB8NjMxMDc1YTAyZWM1MWMxZTlkYzU2NWM3IiwiYXVkIjoiQ2FwU3RvbmUtYXBwIiwiaWF0IjoxNjYyNzk1OTUyLCJleHAiOjE2NjI4MDMxNTIsImF6cCI6Im03bkRqa29qTmpDMHp1bUJBR1pHOXRrQkJMWHdPWDVGIiwic2NvcGUiOiIiLCJwZXJtaXNzaW9ucyI6WyJjcmVhdGU6YWN0b3JzIiwiZGVsZXRlOmFjdG9ycyIsImdldDphY3RvcnMiLCJnZXQ6bW92aWVzIiwidXBkYXRlOmFjdG9ycyIsInVwZGF0ZTptb3ZpZXMiXX0.SvkN8ic2w3cgN4Z_E43oAwO2qVCtXC53307rx5AXEI-YE_yfaZEssrxCWpaOYmPF7yC3oHT5tGvtuTaOPInsr-xEuBQ3tM0B4nrUhBMAzfII9RwpUOLfoS0Hm3N40RT2QaLf5OOwVdMN7iSmHRl5iZfVxcgu2OQSwByI3BYkOhYHoMsJFGWk3j72UsV8C9k0lSj0Z8XPfOnZDuGWCnxj232vDzbXmfELGTBXyr8Bdf_dOEzdVkxALn8S0UiJKVFyAzSeVc4EaHmuPCpo_i_0yIeFvHtjNOap94Kx2tn7x7kCW6uhhyB2qa2DWThhxzMkZrcFVFJePjtXq1fN_fzTWw"
 
 class TriviaTestCase(unittest.TestCase):
  """This class represents the capstone test case"""
@@ -16,8 +16,9 @@ class TriviaTestCase(unittest.TestCase):
   self.client = self.app.test_client
   self.headers = {"Authorization": "{} {}".format("Bearer", authenActorToken)}
   self.database_name = "TODO"
-  self.database_path = "postgresql://{}:{}@{}/{}".format('postgres', '123', 'localhost:5432', self.database_name)
-  setup_db(self.app, self.database_path)
+  # self.database_path = "postgresql://{}:{}@{}/{}".format('postgres', '123', 'localhost:5432', self.database_name)
+  # setup_db(self.app, self.database_path)
+  self.database_path = "postgresql+psycopg2://cmsrraognpmaqi:413c93c2cabff045b2bb6910aa152d4f611d582cffa2f1652701518a8d4f1189@ec2-107-23-76-12.compute-1.amazonaws.com:5432/dehkajpu6edohp?sslmode=require"
   self.mock_actor_search_data = {
     "name": "Lilly",
     "gender": "Female",
